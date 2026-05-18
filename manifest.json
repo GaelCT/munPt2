@@ -1,0 +1,22 @@
+{
+    "name": "Model United Nations - CSUB",
+    "short_name": "MUN CSUB",
+    "description": "Model United Nations at California State University, Bakersfield.",
+    "start_url": "/~sec/mun/pages/index.html",
+    "display": "standalone",
+    "background_color": "#023C89",
+    "theme_color": "#023C89",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/~sec/mun/images/MUN.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/~sec/mun/images/MUN.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

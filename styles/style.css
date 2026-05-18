@@ -1,0 +1,773 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer.footer {
+    margin-top: auto;
+}
+
+/* =====================
+   NAVBAR
+   ===================== */
+.navbar {
+    background: linear-gradient(180deg, #023C89 0%, #023C89 100%);
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+    position: relative;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 60px;
+}
+
+.link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    padding: 20px 0;
+    font-family: Verdana;
+}
+
+.link:hover {
+    opacity: 0.8;
+}
+
+.link.active {
+    font-weight: 500;
+}
+
+.link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: white;
+}
+
+.logo-item {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.logo-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #c5a028 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #d4af37;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    position: relative;
+    padding: 5px;
+}
+
+.logo-circle svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* =====================
+   HAMBURGER BUTTON
+   ===================== */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background: #fbc638;
+    border: 2px solid #fbc638;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px 12px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1100;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn.active {
+    background: #e0b030;
+    border-color: #e0b030;
+}
+
+.mobile-menu-btn span {
+    width: 26px;
+    height: 3px;
+    background-color: #023C89;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+/* =====================
+   MAIN / BACKGROUND
+   ===================== */
+.main-content {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.background {
+    background-color: #895129;
+}
+
+/* =====================
+   CONTAINER — shared base
+   All pages use .container for their banner/hero
+   ===================== */
+.container {
+    position: relative;
+    width: 100%;
+    /* Default: shrink to fit content (events page, etc.) */
+    height: auto;
+    overflow: hidden;
+}
+
+/* =====================
+   HOME PAGE HERO
+   Only full-height when #mainImage is inside
+   ===================== */
+.container:has(#mainImage) {
+    height: calc(100vh - 60px);
+}
+
+#mainImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Donate button — top center (home only) */
+.hero-btn {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    background: #023C89;
+    color: #fbc638;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    border: 3px solid #fbc638;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.hero-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fbc638;
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.hero-btn:hover::before {
+    left: 0;
+}
+
+.hero-btn:hover {
+    color: #023C89;
+    border-color: #023C89;
+    transform: translateX(-50%) scale(1.05);
+}
+
+.btn-arrow {
+    font-size: 24px;
+    transition: transform 0.4s ease;
+}
+
+.hero-btn:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+/* =====================
+   OVERLAY TEXT
+   Home page: bottom-center
+   Other pages: bottom-left (overridden below)
+   ===================== */
+.text {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+    padding: 14px 20px;
+    font-size: 38px;
+    text-align: center;
+    white-space: nowrap;
+    width: max-content;
+    max-width: 88%;
+    z-index: 5;
+    line-height: 1.3;
+}
+
+/* Events / other pages: bottom-left pinned */
+.container:not(:has(#mainImage)) .text {
+    bottom: 10px;
+    left: 10px;
+    transform: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 28px;
+    padding: 10px 16px;
+    white-space: nowrap;
+    width: auto;
+    max-width: 90%;
+}
+
+/* Banner image on non-home pages */
+.container:not(:has(#mainImage)) img {
+    display: block;
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* =====================
+   EVENTS PAGE
+   ===================== */
+#upcoming {
+    text-align: center;
+    font-family: sans-serif;
+    margin: 40px 0 30px 0;
+    font-size: 2rem;
+    color: #333;
+}
+
+.lowerContainer {
+    padding: 0 20px;
+}
+
+.events {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.event {
+    display: grid;
+    grid-template-columns: 10% 30% 1fr;
+    gap: 3%;
+    padding: 30px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: start;
+}
+
+.event:last-child {
+    border-bottom: none;
+}
+
+.event-date {
+    text-align: center;
+    color: #666;
+}
+
+.event-date .month {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.event-date .day {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.event-image {
+    width: 100%;
+}
+
+.event-image img {
+    width: 100%;
+    height: 20vh;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event-details h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.event-info {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.event-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.event-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.event-link:hover {
+    color: #023C89;
+}
+
+/* =====================
+   FOOTER
+   ===================== */
+.footer {
+    background: linear-gradient(160deg, #023C89 0%, #012d6b 100%);
+    color: #ffffff;
+    padding: 48px 60px 28px;
+    position: relative;
+    margin-top: auto;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #fbc638, #f4d03f, #fbc638);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 36px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+}
+
+.footer-brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fbc638;
+}
+
+.footer-brand-desc {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.75;
+}
+
+.footer-links-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fbc638;
+    margin-bottom: 6px;
+}
+
+.footer-links-group a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    display: inline-block;
+}
+
+.footer-links-group a:hover {
+    color: #ffffff;
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-copy,
+.footer-school {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* =====================
+   OTHER PAGE HERO
+   ===================== */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+    color: #0d3d7a;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    color: #555;
+    font-size: 1.2rem;
+}
+
+/* =====================
+   TABLET (≤1024px)
+   ===================== */
+@media (max-width: 1024px) {
+    .nav-container {
+        padding: 0 30px;
+    }
+
+    .link {
+        font-size: 11px;
+        letter-spacing: 1.2px;
+    }
+
+    .text {
+        font-size: 28px;
+    }
+
+    .hero-btn {
+        font-size: 17px;
+        padding: 13px 28px;
+    }
+
+    .footer {
+        padding: 40px 40px 24px;
+    }
+
+    .events {
+        max-width: 95%;
+    }
+}
+
+/* =====================
+   MOBILE (≤768px)
+   ===================== */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 0 16px;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, #1a4d8f 0%, #0d3d7a 100%);
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0;
+        padding: 0;
+        height: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+        max-height: 700px;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo-item {
+        margin: 20px 0;
+        /* order: -1; */
+        border-bottom: none;
+    }
+
+    .link {
+        display: block;
+        padding: 15px 20px;
+    }
+
+    .link.active::after {
+        display: none;
+    }
+
+    /* Home hero */
+    .hero-btn {
+        top: 16px;
+        font-size: 14px;
+        padding: 10px 22px;
+        gap: 7px;
+        border-width: 2px;
+    }
+
+    .btn-arrow {
+        font-size: 18px;
+    }
+
+    .text {
+        font-size: 18px;
+        padding: 8px 12px;
+        white-space: normal;
+        width: 78%;
+        max-width: 78%;
+        bottom: 10%;
+        line-height: 1.4;
+    }
+
+    /* Non-home banner text */
+    .container:not(:has(#mainImage)) .text {
+        font-size: 18px;
+        bottom: 8px;
+        left: 8px;
+    }
+
+    /* Non-home banner image height */
+    .container:not(:has(#mainImage)) img {
+        height: 25vh;
+    }
+
+    /* Events list — single column */
+    .events {
+        max-width: 100%;
+        padding: 10px 16px;
+    }
+
+    .event {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px 0;
+    }
+
+    .event-date {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .event-date .month {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    .event-date .day {
+        font-size: 1.5rem;
+    }
+
+    .event-image img {
+        height: 180px;
+    }
+
+    .event-details h3 {
+        font-size: 1.1rem;
+    }
+
+    .event-info {
+        font-size: 0.85rem;
+    }
+
+    .event-description {
+        font-size: 0.85rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 36px 24px 20px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 6px;
+    }
+}
+
+/* =====================
+   SMALL MOBILE (≤480px)
+   ===================== */
+@media (max-width: 480px) {
+    .link {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .logo-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .hero-btn {
+        top: 12px;
+        font-size: 13px;
+        padding: 9px 18px;
+    }
+
+    .text {
+        font-size: 15px;
+        padding: 6px 10px;
+        width: 82%;
+        max-width: 82%;
+        bottom: 8%;
+    }
+
+    .container:not(:has(#mainImage)) .text {
+        font-size: 15px;
+    }
+
+    .container:not(:has(#mainImage)) img {
+        height: 20vh;
+    }
+
+    .event-image img {
+        height: 150px;
+    }
+
+    .footer {
+        padding: 28px 16px 16px;
+    }
+
+    .hero {
+        padding: 40px 15px;
+    }
+}
